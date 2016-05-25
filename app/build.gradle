@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'Charles'
+            keyPassword 'password'
+            storeFile file('C:/Users/Darnell/Android Apps/ud867/FinalProject/keystore.jks')
+            storePassword 'password'
+        }
+    }
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId "com.udacity.gradle.builditbigger"
+        minSdkVersion 15
+        targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        dexOptions {
+            javaMaxHeapSize "4g"
+            preDexLibraries = false
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+    productFlavors {
+        free {
+            applicationId "com.udacity.gradle.builditbigger.free"
+        }
+
+        paid {
+            applicationId "com.udacity.gradle.builditbigger.paid"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // Added for AdMob
+    //compile project('libraries:jokes')
+    //compile file 'libs/Jokes.jar'
+    //compile files('libs/.jar')
+    //compile files('lib/GotJokes.jar')
+    //compile project(':lib')
+    compile project(':deliverjoke')
+    compile project(path: ':retrieveJokes', configuration: 'android-endpoints')
+    //compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
+    compile 'com.google.android.gms:play-services-identity:8.4.0'
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
+}
+
+
+
+
+
+
+
+
+
+
+
+
